@@ -1,13 +1,13 @@
 {
-  "name": "21_ajax",
+  "name": "NFLArrests API Crawler",
   "version": "1.0.0",
-  "description": "Looking at making AJAX Reqeusts",
+  "description": "Showing data from NFLArrests.com API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ian Candy",
-  "license": "ISC",
+  "author": "Matt Fender & Eric Hasselbring",
+  "license": "EH + MF",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.1",
