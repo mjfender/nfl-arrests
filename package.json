@@ -9,6 +9,8 @@
   "author": "Ian Candy",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.1.1"
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "underscore": "^1.8.3"
   }
 }
