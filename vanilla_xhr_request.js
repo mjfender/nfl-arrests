@@ -13,8 +13,49 @@ request.onload = function(){
 request.send()
 console.log('sending the request')
 
+var dog = {
+  sayHello: function(){
+    console.log('Woof!@')
+  }
+}
 
-function send(){
-  // whenever the response comes back
-  this.onload()
+dog.sayHello()
+
+var $ = {
+  ajax: function (opts){
+    let url = opts.url
+    let successFunction = opts.successFunction
+
+    function onLoad(){
+      let data = JSON.parse(this.response)
+      successFunction(data)
+    }
+
+    let request = new XMLHttpRequest();
+
+    request.open('GET', url, true);
+
+    request.onload = onLoad
+
+    request.send()
+  }
+}
+
+
+function ajax(opts){
+  let url = opts.url
+  let successFunction = opts.successFunction
+
+  function onLoad(){
+    let data = JSON.parse(this.response)
+    successFunction(data)
+  }
+
+  let request = new XMLHttpRequest();
+
+  request.open('GET', url, true);
+
+  request.onload = onLoad
+
+  request.send()
 }
