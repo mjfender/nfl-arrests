@@ -74,8 +74,8 @@ function findAndRenderTeams(){
   $teamInput.val('')
   var $arrestList = $('ul.js--arrest-list')
   $arrestList.html('')
-  var $arrestStats = $('ul.js--arrest-stats')
-  $arrestStats.html('')
+  var $arrestStats = $('div.js--team-stats')
+  $arrestStats.html('<ul class="js--team-stats"></ul>')
   
   $.ajax({
     url: `${TEAM_URL}?term=${teamQuery}`,
@@ -86,9 +86,11 @@ function findAndRenderTeams(){
 
 function findTeamCodeAndRenderArrests (data) {
   if ( nullChecker(data) ) {
-    let teamHeadline = $('div.js--team-list h3')
+    let $hiddenFields = $('.hidden')
+    $hiddenFields.toggleClass('hidden')
+    let teamHeadline = $('div.js--team-headline')
     teamHeadline.html('')
-    teamHeadline.html(`${data[0].city} ${data[0].teams_full_name}`)
+    teamHeadline.html(`<h3>${data[0].city} ${data[0].teams_full_name}</h3>`)
     findAndRenderTeams(data[0].team_code)
   }
 
@@ -103,9 +105,9 @@ function findTeamCodeAndRenderArrests (data) {
 
   function displayArrests(data) {
     var $arrestList = $('ul.js--arrest-list')
-    var $arrestCounter = $('div.js--team-list h4')
-    $arrestCounter.html(`${data.length} arrests`)
-    var $arrestStats = $('ul.js--arrest-stats')
+    var $arrestCounter = $('div.js--team-stats')
+    $arrestCounter.html(`<h4>${data.length} arrests</h4>`)
+    var $arrestStats = $('div.js--team-stats')
 
    var arrests = {}
    // START FOREACH LOOP
@@ -127,24 +129,23 @@ function findTeamCodeAndRenderArrests (data) {
 
        if (index !== array.length - 1) {
          $arrestList.append(`
-          <li><strong>Date:</strong> ${date}
-            <ul>
-              <li><strong>Name:</strong>&nbsp;${name}<li>
-              <li><strong>Arrest Type:</strong>&nbsp;${category}<li>
-              <li><strong>Description:</strong>&nbsp;${description}<li>
-              <li><strong>Outcome:</strong>&nbsp;${outcome}<li>
-            </ul></li><br><hr><br>`)}
+          <li><strong>Date:</strong> ${date}</li>
+          <li><strong>Name:</strong>&nbsp;${name}<li>
+          <li><strong>Arrest Type:</strong>&nbsp;${category}</li>
+          <li><strong>Description:</strong>&nbsp;${description}</li>
+          <li><strong>Outcome:</strong>&nbsp;${outcome}</li>
+          <br><hr><br>`)}
          else {
           $arrestList.append(`
-          <li><strong>Date:</strong> ${date}
-            <ul>
-              <li><strong>Name:</strong>&nbsp;${name}<li>
-              <li><strong>Arrest Type:</strong>&nbsp;${category}<li>
-              <li><strong>Description:</strong>&nbsp;${description}<li>
-              <li><strong>Outcome:</strong>&nbsp;${outcome}<li>
-            </ul></li><br>`)}
+          <li><strong>Date:</strong> ${date}</li>
+          <li><strong>Name:</strong>&nbsp;${name}<li>
+          <li><strong>Arrest Type:</strong>&nbsp;${category}<li>
+          <li><strong>Description:</strong>&nbsp;${description}<li>
+          <li><strong>Outcome:</strong>&nbsp;${outcome}<li>
+          <br>`)}
 
          }
+
          for (var property in arrests) {
           if (arrests.hasOwnProperty(property)) {
             $arrestStats.append(`<li>${property}: ${arrests[property]}</li>`)
